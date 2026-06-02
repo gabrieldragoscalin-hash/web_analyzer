@@ -40,7 +40,7 @@ export default function Home() {
     try {
       const requestBody: AnalysisRequest = { url: url };
 
-      const response = await fetch("http://127.0.0.1:8000/analyze", {
+      const response = await fetch("https://web-analyzer-backend-622w.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
