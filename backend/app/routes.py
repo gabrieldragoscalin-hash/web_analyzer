@@ -1,0 +1,59 @@
+import requests
+from fastapi import APIRouter, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
+from .ai import ai_enhance
+from .analyzer import detect_issues
+from .schemas import WebsiteRequest
+from .scraper import fetch_site
+
+router = APIRouter()
+
+
+@router.post("/analyze")
+def analyze(request: WebsiteRequest):
+    if not request.url.startswith(("http://", "https://")):
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid URL format. Please include http:// or https://",
+        )
+
+    try:
+        site_data = fetch_site(request.url)
+        analysis = detect_issues(site_data)
+        ai_report = ai_enhance(request.url, analysis)
+
+        return {
+            "url": request.url,
+            "score": analysis["score"],
+            "issues": analysis["issues"],
+            "fixes": analysis["fixes"],
+            "ai_report": ai_report,
+        }
+
+    except requests.exceptions.RequestException as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Failed to reach the website: {str(exc)}",
+        ) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=f"An unexpected internal error occurred: {str(exc)}",
+        ) from exc
+
+
+def create_app() -> FastAPI:
+    app = FastAPI()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    app.include_router(router)
+    return app
+
+
+app = create_app()
