@@ -16,20 +16,27 @@ export default function AnalysisHero({
     onAnalyze,
 }: AnalysisHeroProps) {
     return (
-        <header className="pt-10 pb-10 px-4 max-w-6xl mx-auto text-center">
-            <span className="bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+        <header className="pt-10 pb-12 px-4 max-w-6xl mx-auto text-center">
+            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 Free Web Analyzer
-            </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 bg-gradient-to-r from-slate-900 to-blue-700 bg-clip-text text-transparent">
+            </div>
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-sky-600 bg-clip-text text-transparent">
                 Is your website costing you customers?
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 mb-6 max-w-2xl mx-auto">
-                Get a free 60-second report that shows exactly what’s wrong and how to fix it.
+            <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Get a fast, clear report on speed, trust, and layout issues — then fix what matters most.
             </p>
+
+            <div className="mb-6 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600">
+                <span className="rounded-full bg-white/90 px-3 py-1 shadow-sm border border-slate-200">⚡ 60-second analysis</span>
+                <span className="rounded-full bg-white/90 px-3 py-1 shadow-sm border border-slate-200">📱 Mobile friendly</span>
+                <span className="rounded-full bg-white/90 px-3 py-1 shadow-sm border border-slate-200">💡 AI fix suggestions</span>
+            </div>
 
             <form
                 onSubmit={onAnalyze}
-                className="max-w-xl mx-auto bg-white p-2 rounded-2xl shadow-xl border border-slate-200/80 flex flex-col sm:flex-row gap-2"
+                className="max-w-2xl mx-auto rounded-3xl border border-slate-200 bg-white/95 p-2 shadow-[0_18px_45px_-18px_rgba(15,23,42,0.35)] backdrop-blur flex flex-col sm:flex-row gap-2"
             >
                 <input
                     type="url"
@@ -37,12 +44,12 @@ export default function AnalysisHero({
                     placeholder="https://yourwebsite.com"
                     value={url}
                     onChange={(event) => onUrlChange(event.target.value)}
-                    className="flex-1 px-4 py-3 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 bg-slate-50 text-slate-900 outline-none placeholder:text-slate-400"
+                    className="flex-1 px-4 py-3 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-blue-500 bg-slate-50 text-slate-900 outline-none placeholder:text-slate-400"
                 />
                 <button
                     type="submit"
                     disabled={loading}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shrink-0"
+                    className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-blue-200 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shrink-0"
                 >
                     {loading ? (
                         <>

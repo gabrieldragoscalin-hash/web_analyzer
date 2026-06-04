@@ -37,7 +37,7 @@ export default function AnalysisResults({
     return (
         <section className="max-w-7xl mx-auto px-4 pb-20 scroll-mt-6">
             <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
-                <article className="bg-gradient-to-b from-white to-slate-50 border-2 border-blue-500 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <article className="bg-gradient-to-b from-white to-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)]">
                     <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
                         <div>
                             <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400">Analysis Report For</h3>
@@ -65,7 +65,7 @@ export default function AnalysisResults({
                             <p className="text-green-600 font-medium bg-green-50 p-4 rounded-xl">🎉 No critical issues found! Your website baseline looks solid.</p>
                         ) : (
                             report.issues.map((issue, index) => (
-                                <div key={`${issue}-${index}`} className="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm space-y-2">
+                                <div key={`${issue}-${index}`} className="bg-white p-4 rounded-2xl border border-slate-200/70 shadow-sm hover:shadow-md transition-shadow duration-200 space-y-2">
                                     <div className="flex items-start gap-2.5 text-red-600 font-semibold text-sm">
                                         <span className="shrink-0 mt-0.5">❌</span>
                                         <p>{formatIssueLabel(issue)}</p>
@@ -89,7 +89,7 @@ export default function AnalysisResults({
                     ) : null}
                 </article>
 
-                <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sticky top-20">
+                <aside className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] sticky top-20 backdrop-blur">
                     <h3 className="text-lg font-bold text-slate-900">More options</h3>
                     <p className="mt-1 text-sm text-slate-600">Choose the next step after your free report.</p>
                     <div className="mt-5 space-y-4">
