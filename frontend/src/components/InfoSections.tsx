@@ -2,7 +2,7 @@ export default function InfoSections() {
     return (
         <>
             <section className="bg-slate-950 text-white py-20 px-4 relative overflow-hidden">
-                <div className="absolute inset-0 -z-10 opacity-40" style={{backgroundImage: 'radial-gradient(circle at top, rgba(56,189,248,0.12), transparent 30%), radial-gradient(circle at right, rgba(129,140,248,0.12), transparent 25%)'}} />
+                <div className="absolute inset-0 -z-10 opacity-40" style={{ backgroundImage: 'radial-gradient(circle at top, rgba(56,189,248,0.12), transparent 30%), radial-gradient(circle at right, rgba(129,140,248,0.12), transparent 25%)' }} />
                 <div className="max-w-4xl mx-auto text-center">
                     <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sky-300">Why teams use it</p>
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">Turn website friction into revenue-ready clarity</h2>

@@ -32,7 +32,7 @@ export default function AnalysisHero({
             <div className="mb-6 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600">
                 <span className="rounded-full bg-white/95 px-3 py-1 shadow-sm border border-slate-200 text-slate-700">⚡ 60-second analysis</span>
                 <span className="rounded-full bg-white/95 px-3 py-1 shadow-sm border border-slate-200 text-slate-700">📱 Mobile-first insights</span>
-                <span className="rounded-full bg-white/95 px-3 py-1 shadow-sm border border-slate-200 text-slate-700">🧩 Clear AI fixes</span>
+                <span className="rounded-full bg-white/95 px-3 py-1 shadow-sm border border-slate-200 text-slate-700">🧩 Clear fixes</span>
             </div>
 
             <form
