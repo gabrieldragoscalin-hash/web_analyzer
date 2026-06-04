@@ -27,6 +27,10 @@ export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [premiumLoading, setPremiumLoading] = useState<boolean>(false);
+  const [showContactForm, setShowContactForm] = useState<boolean>(false);
+  const [contactEmail, setContactEmail] = useState<string>("");
+  const [contactPhone, setContactPhone] = useState<string>("");
+  const [contactSubmitted, setContactSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [report, setReport] = useState<AnalysisResponse | null>(null);
 
@@ -75,6 +79,11 @@ export default function Home() {
   };
 
   // Helper type guard to make rendering the typed AI block clean
+  const handleContactSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setContactSubmitted(true);
+  };
+
   const handleDownloadDetailedReport = async () => {
     if (!url) return;
 
@@ -184,17 +193,77 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-              <p className="text-sm text-slate-600">Want a deeper PDF with real fixes, code examples, and business-friendly explanations?</p>
+            <div className="mb-6 grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
+                <p className="text-sm font-semibold text-amber-900">Want a deeper PDF with clear fixes and simple step-by-step explanations?</p>
+                <p className="text-xs text-amber-800 mt-1">Perfect for non-coders who want a practical action plan.</p>
+                <button
+                  type="button"
+                  onClick={handleDownloadDetailedReport}
+                  disabled={premiumLoading || !report}
+                  className="mt-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {premiumLoading ? "Generating PDF..." : "Get your detailed report — $12.99"}
+                </button>
+              </div>
+
+              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
+                <p className="text-sm font-semibold text-blue-900">Need a done-for-you homepage improvement?</p>
+                <p className="text-xs text-blue-800 mt-1">We can redesign your homepage to help visitors trust your business faster.</p>
+                <a
+                  href="#"
+                  className="mt-3 inline-flex items-center rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
+                >
+                  Get a redesigned homepage for $39.99
+                </a>
+              </div>
+            </div>
+
+            <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-sm font-semibold text-slate-800">Want a better-looking and faster website?</p>
+              <p className="text-xs text-slate-600 mt-1">Tell me how to reach you and I’ll follow up within 24 hours.</p>
               <button
                 type="button"
-                onClick={handleDownloadDetailedReport}
-                disabled={premiumLoading || !report}
-                className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-5 py-3 rounded-xl shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                onClick={() => setShowContactForm(true)}
+                className="mt-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200"
               >
-                {premiumLoading ? "Generating PDF..." : "Get a more detailed report with real fixes — $12.99"}
+                Hire me to get it
               </button>
             </div>
+
+            {showContactForm && (
+              <div className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
+                <h4 className="text-sm font-semibold text-slate-800">Let’s talk about your website</h4>
+                <p className="text-xs text-slate-600 mt-1">Prices are discussed directly for every customer’s needs.</p>
+                <form onSubmit={handleContactSubmit} className="mt-4 space-y-3">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Email address"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-0 focus:border-blue-500"
+                  />
+                  <input
+                    type="tel"
+                    required
+                    placeholder="Phone number"
+                    value={contactPhone}
+                    onChange={(e) => setContactPhone(e.target.value)}
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-0 focus:border-blue-500"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full rounded-xl bg-green-600 px-4 py-3 text-sm font-semibold text-white hover:bg-green-700"
+                  >
+                    Send request
+                  </button>
+                </form>
+                {contactSubmitted && (
+                  <p className="mt-3 rounded-xl bg-green-50 px-3 py-2 text-sm text-green-700">Expect an email in the next 24 hours.</p>
+                )}
+              </div>
+            )}
 
             {/* AI Summary Block */}
             {aiReportData && (
