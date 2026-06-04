@@ -1,7 +1,7 @@
 export default function InfoSections() {
     return (
         <>
-            <section className="bg-slate-900 text-white py-20 px-4 relative overflow-hidden">
+            <section className="bg-slate-950 text-white py-20 px-4 relative overflow-hidden">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">Slow websites lose customers</h2>
                     <p className="text-slate-300 text-sm md:text-base mb-10 max-w-2xl mx-auto">A few visible improvements can instantly increase trust, clarity, and conversion on your homepage.</p>
@@ -25,7 +25,12 @@ export default function InfoSections() {
                 </div>
             </section>
 
-            <section className="py-20 px-4 max-w-5xl mx-auto text-center">
+            <section className="py-20 px-4 max-w-6xl mx-auto text-center">
+                <div className="mb-10 rounded-[28px] border border-slate-200 bg-gradient-to-r from-white via-slate-50 to-white p-6 shadow-[0_18px_35px_-25px_rgba(15,23,42,0.35)]">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-700">Why this feels premium</p>
+                    <h2 className="mt-2 text-3xl font-bold text-slate-900">A sharper product story, not just a checklist.</h2>
+                    <p className="mx-auto mt-3 max-w-3xl text-sm text-slate-600 md:text-base">Clear diagnostics, confident recommendations, and polished presentation make the experience feel like a real SaaS product.</p>
+                </div>
                 <h2 className="text-3xl font-bold mb-3">How it works</h2>
                 <p className="text-slate-500 text-sm md:text-base mb-10 max-w-2xl mx-auto">A simple 3-step flow that turns a rough homepage into a clearer sales page.</p>
                 <div className="grid md:grid-cols-3 gap-8">
@@ -48,6 +53,10 @@ export default function InfoSections() {
             </section>
 
             <section className="bg-slate-100 py-20 px-4 border-t border-slate-200">
+                <div className="mx-auto mb-10 flex max-w-4xl flex-col items-center text-center">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-700">Preview</p>
+                    <h2 className="mt-2 text-2xl font-bold text-slate-900 md:text-3xl">A premium report layout your visitors will trust</h2>
+                </div>
                 <div className="max-w-2xl mx-auto">
                     <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">Example output preview</h2>
                     <p className="text-slate-500 text-center mb-8 text-sm">Here is a glimpse of the structural breakdowns you will receive:</p>

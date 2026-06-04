@@ -17,14 +17,14 @@ export default function AnalysisHero({
 }: AnalysisHeroProps) {
     return (
         <header className="pt-10 pb-12 px-4 max-w-6xl mx-auto text-center">
-            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur">
+            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/90 px-4 py-2 text-sm font-semibold text-blue-700 shadow-[0_12px_30px_-18px_rgba(37,99,235,0.45)] backdrop-blur">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 Free Web Analyzer
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-sky-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-sky-600 bg-clip-text text-transparent drop-shadow-sm">
                 Is your website costing you customers?
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed text-balance">
                 Get a fast, clear report on speed, trust, and layout issues — then fix what matters most.
             </p>
 
@@ -36,7 +36,7 @@ export default function AnalysisHero({
 
             <form
                 onSubmit={onAnalyze}
-                className="max-w-2xl mx-auto rounded-3xl border border-slate-200 bg-white/95 p-2 shadow-[0_18px_45px_-18px_rgba(15,23,42,0.35)] backdrop-blur flex flex-col sm:flex-row gap-2"
+                className="max-w-2xl mx-auto rounded-[28px] border border-slate-200 bg-white/95 p-2 shadow-[0_25px_60px_-28px_rgba(15,23,42,0.45)] backdrop-blur flex flex-col sm:flex-row gap-2"
             >
                 <input
                     type="url"
@@ -49,7 +49,7 @@ export default function AnalysisHero({
                 <button
                     type="submit"
                     disabled={loading}
-                    className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-blue-200 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shrink-0"
+                    className="bg-gradient-to-r from-blue-600 via-blue-700 to-sky-500 hover:from-blue-700 hover:via-blue-800 hover:to-sky-600 text-white font-semibold px-6 py-3 rounded-2xl shadow-[0_18px_30px_-14px_rgba(37,99,235,0.45)] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shrink-0"
                 >
                     {loading ? (
                         <>

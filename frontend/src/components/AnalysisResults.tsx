@@ -37,7 +37,7 @@ export default function AnalysisResults({
     return (
         <section className="max-w-7xl mx-auto px-4 pb-20 scroll-mt-6">
             <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
-                <article className="bg-gradient-to-b from-white to-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)]">
+                <article className="bg-gradient-to-b from-white via-slate-50 to-white border border-slate-200 rounded-[28px] p-6 md:p-8 shadow-[0_24px_50px_-24px_rgba(15,23,42,0.45)]">
                     <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
                         <div>
                             <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400">Analysis Report For</h3>
@@ -89,7 +89,7 @@ export default function AnalysisResults({
                     ) : null}
                 </article>
 
-                <aside className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] sticky top-20 backdrop-blur">
+                <aside className="rounded-[28px] border border-slate-200 bg-white/95 p-6 shadow-[0_24px_50px_-24px_rgba(15,23,42,0.45)] sticky top-20 backdrop-blur">
                     <h3 className="text-lg font-bold text-slate-900">More options</h3>
                     <p className="mt-1 text-sm text-slate-600">Choose the next step after your free report.</p>
                     <div className="mt-5 space-y-4">
