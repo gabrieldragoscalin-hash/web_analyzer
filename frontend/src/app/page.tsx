@@ -127,16 +127,27 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-500 selection:text-white">
+      <nav className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
+          <div>
+            <p className="text-sm font-semibold tracking-wide text-blue-700 uppercase">Web Analyzer</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Login</button>
+            <button className="rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700">Register</button>
+          </div>
+        </div>
+      </nav>
 
       {/* HERO SECTION */}
-      <header className="py-20 px-4 max-w-4xl mx-auto text-center">
+      <header className="pt-10 pb-10 px-4 max-w-6xl mx-auto text-center">
         <span className="bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
           Free Web Analyzer
         </span>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 bg-gradient-to-r from-slate-900 to-blue-700 bg-clip-text text-transparent">
           Is your website costing you customers?
         </h1>
-        <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-slate-600 mb-6 max-w-2xl mx-auto">
           Get a free 60-second report that shows exactly what’s wrong and how to fix it.
         </p>
 
@@ -178,132 +189,133 @@ export default function Home() {
 
       {/* DYNAMIC RESULTS DISPLAY */}
       {report && (
-        <section className="max-w-3xl mx-auto px-4 pb-20 scroll-mt-6">
-          <div className="bg-gradient-to-b from-white to-slate-50 border-2 border-blue-500 rounded-3xl p-6 md:p-8 shadow-2xl">
-            <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
-              <div>
-                <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400">Analysis Report For</h3>
-                <p className="text-sm font-semibold text-blue-600 break-all">{report.url}</p>
-              </div>
-              <div className="text-right">
-                <span className="text-xs uppercase tracking-wider font-bold text-slate-400">Performance Score</span>
-                <p className={`text-3xl font-black ${report.score >= 70 ? 'text-green-600' : report.score >= 40 ? 'text-amber-500' : 'text-red-500'}`}>
-                  {report.score}/100
-                </p>
-              </div>
-            </div>
-
-            <div className="mb-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
-                <p className="text-sm font-semibold text-amber-900">Want a deeper PDF with clear fixes and simple step-by-step explanations?</p>
-                <p className="text-xs text-amber-800 mt-1">Perfect for non-coders who want a practical action plan.</p>
-                <button
-                  type="button"
-                  onClick={handleDownloadDetailedReport}
-                  disabled={premiumLoading || !report}
-                  className="mt-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {premiumLoading ? "Generating PDF..." : "Get your detailed report — $12.99"}
-                </button>
+        <section className="max-w-7xl mx-auto px-4 pb-20 scroll-mt-6">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
+            <article className="bg-gradient-to-b from-white to-slate-50 border-2 border-blue-500 rounded-3xl p-6 md:p-8 shadow-2xl">
+              <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
+                <div>
+                  <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400">Analysis Report For</h3>
+                  <p className="text-sm font-semibold text-blue-600 break-all">{report.url}</p>
+                </div>
+                <div className="text-right">
+                  <span className="text-xs uppercase tracking-wider font-bold text-slate-400">Performance Score</span>
+                  <p className={`text-3xl font-black ${report.score >= 70 ? 'text-green-600' : report.score >= 40 ? 'text-amber-500' : 'text-red-500'}`}>
+                    {report.score}/100
+                  </p>
+                </div>
               </div>
 
-              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-                <p className="text-sm font-semibold text-blue-900">Need a done-for-you homepage improvement?</p>
-                <p className="text-xs text-blue-800 mt-1">We can redesign your homepage to help visitors trust your business faster.</p>
-                <a
-                  href="#"
-                  className="mt-3 inline-flex items-center rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
-                >
-                  Get a redesigned homepage for $39.99
-                </a>
-              </div>
-            </div>
+              {/* AI Summary Block */}
+              {aiReportData && (
+                <div className="mb-8 bg-blue-50/50 rounded-2xl p-5 border border-blue-100">
+                  <h4 className="font-bold text-blue-900 mb-2">📋 Executive Summary</h4>
+                  <p className="text-slate-700 text-sm leading-relaxed mb-3">{aiReportData.summary}</p>
+                  <p className="text-slate-600 text-xs italic">{aiReportData.explanation}</p>
+                </div>
+              )}
 
-            <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <p className="text-sm font-semibold text-slate-800">Want a better-looking and faster website?</p>
-              <p className="text-xs text-slate-600 mt-1">Tell me how to reach you and I’ll follow up within 24 hours.</p>
-              <button
-                type="button"
-                onClick={() => setShowContactForm(true)}
-                className="mt-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200"
-              >
-                Hire me to get it
-              </button>
-            </div>
-
-            {showContactForm && (
-              <div className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
-                <h4 className="text-sm font-semibold text-slate-800">Let’s talk about your website</h4>
-                <p className="text-xs text-slate-600 mt-1">Prices are discussed directly for every customer’s needs.</p>
-                <form onSubmit={handleContactSubmit} className="mt-4 space-y-3">
-                  <input
-                    type="email"
-                    required
-                    placeholder="Email address"
-                    value={contactEmail}
-                    onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-0 focus:border-blue-500"
-                  />
-                  <input
-                    type="tel"
-                    required
-                    placeholder="Phone number"
-                    value={contactPhone}
-                    onChange={(e) => setContactPhone(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-0 focus:border-blue-500"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full rounded-xl bg-green-600 px-4 py-3 text-sm font-semibold text-white hover:bg-green-700"
-                  >
-                    Send request
-                  </button>
-                </form>
-                {contactSubmitted && (
-                  <p className="mt-3 rounded-xl bg-green-50 px-3 py-2 text-sm text-green-700">Expect an email in the next 24 hours.</p>
+              {/* Issues & Fixes Lists */}
+              <div className="space-y-4">
+                <h4 className="font-bold text-slate-800 text-lg">Detected Issues & Fixes</h4>
+                {report.issues.length === 0 ? (
+                  <p className="text-green-600 font-medium bg-green-50 p-4 rounded-xl">🎉 No critical issues found! Your website baseline looks solid.</p>
+                ) : (
+                  report.issues.map((issue, idx) => (
+                    <div key={idx} className="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm space-y-2">
+                      <div className="flex items-start gap-2.5 text-red-600 font-semibold text-sm">
+                        <span className="shrink-0 mt-0.5">❌</span>
+                        <p className="capitalize">{issue.replace(/_/g, " ")}</p>
+                      </div>
+                      <div className="flex items-start gap-2.5 text-green-700 font-medium text-sm pl-6 border-l-2 border-dashed border-slate-200 ml-3">
+                        <span className="shrink-0">✅ Fix:</span>
+                        <p>{report.fixes[idx]}</p>
+                      </div>
+                    </div>
+                  ))
                 )}
               </div>
-            )}
 
-            {/* AI Summary Block */}
-            {aiReportData && (
-              <div className="mb-8 bg-blue-50/50 rounded-2xl p-5 border border-blue-100">
-                <h4 className="font-bold text-blue-900 mb-2">📋 Executive Summary</h4>
-                <p className="text-slate-700 text-sm leading-relaxed mb-3">{aiReportData.summary}</p>
-                <p className="text-slate-600 text-xs italic">{aiReportData.explanation}</p>
-              </div>
-            )}
-
-            {/* Issues & Fixes Lists */}
-            <div className="space-y-4">
-              <h4 className="font-bold text-slate-800 text-lg">Detected Issues & Fixes</h4>
-              {report.issues.length === 0 ? (
-                <p className="text-green-600 font-medium bg-green-50 p-4 rounded-xl">🎉 No critical issues found! Your website baseline looks solid.</p>
-              ) : (
-                report.issues.map((issue, idx) => (
-                  <div key={idx} className="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm space-y-2">
-                    <div className="flex items-start gap-2.5 text-red-600 font-semibold text-sm">
-                      <span className="shrink-0 mt-0.5">❌</span>
-                      <p className="capitalize">{issue.replace(/_/g, " ")}</p>
-                    </div>
-                    <div className="flex items-start gap-2.5 text-green-700 font-medium text-sm pl-6 border-l-2 border-dashed border-slate-200 ml-3">
-                      <span className="shrink-0">✅ Fix:</span>
-                      <p>{report.fixes[idx]}</p>
-                    </div>
-                  </div>
-                ))
+              {/* AI Business Impact Block */}
+              {aiReportData?.business_impact && (
+                <div className="mt-8 border-t border-slate-100 pt-6">
+                  <h4 className="font-bold text-red-900 text-sm uppercase tracking-wide mb-2">⚠️ Estimated Business Impact</h4>
+                  <p className="text-slate-700 text-sm bg-red-50/40 p-4 rounded-xl border border-red-100/60 leading-relaxed">
+                    {aiReportData.business_impact}
+                  </p>
+                </div>
               )}
-            </div>
+            </article>
 
-            {/* AI Business Impact Block */}
-            {aiReportData?.business_impact && (
-              <div className="mt-8 border-t border-slate-100 pt-6">
-                <h4 className="font-bold text-red-900 text-sm uppercase tracking-wide mb-2">⚠️ Estimated Business Impact</h4>
-                <p className="text-slate-700 text-sm bg-red-50/40 p-4 rounded-xl border border-red-100/60 leading-relaxed">
-                  {aiReportData.business_impact}
-                </p>
+            <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sticky top-20">
+              <h3 className="text-lg font-bold text-slate-900">More options</h3>
+              <p className="mt-1 text-sm text-slate-600">Choose the next step after your free report.</p>
+              <div className="mt-5 space-y-4">
+                <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4 shadow-sm">
+                  <p className="text-sm font-semibold text-amber-900">1. Premium report</p>
+                  <p className="text-xs text-amber-800 mt-1">A simple PDF with clear fixes and step-by-step explanations.</p>
+                  <button
+                    type="button"
+                    onClick={handleDownloadDetailedReport}
+                    disabled={premiumLoading || !report}
+                    className="mt-3 w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {premiumLoading ? "Generating PDF..." : "Get your detailed report — $12.99"}
+                  </button>
+                </div>
+
+                <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 shadow-sm">
+                  <p className="text-sm font-semibold text-blue-900">2. Redesign your homepage</p>
+                  <p className="text-xs text-blue-800 mt-1">A done-for-you homepage improvement to help visitors trust your business faster.</p>
+                  <a
+                    href="#"
+                    className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
+                  >
+                    Get a redesigned homepage for $39.99
+                  </a>
+                </div>
+
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
+                  <p className="text-sm font-semibold text-slate-900">3. Hire me to improve it</p>
+                  <p className="text-xs text-slate-600 mt-1">Tell me how to reach you and I’ll follow up within 24 hours.</p>
+                  <button
+                    type="button"
+                    onClick={() => setShowContactForm(true)}
+                    className="mt-3 w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200"
+                  >
+                    Hire me to get it
+                  </button>
+                </div>
+
+                {showContactForm && (
+                  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <h4 className="text-sm font-semibold text-slate-800">Let’s talk about your website</h4>
+                    <p className="text-xs text-slate-600 mt-1">Prices are discussed directly for every customer’s needs.</p>
+                    <form onSubmit={handleContactSubmit} className="mt-4 space-y-3">
+                      <input
+                        type="email"
+                        required
+                        placeholder="Email address"
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-0 focus:border-blue-500"
+                      />
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Phone number"
+                        value={contactPhone}
+                        onChange={(e) => setContactPhone(e.target.value)}
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-0 focus:border-blue-500"
+                      />
+                      <button type="submit" className="w-full rounded-xl bg-green-600 px-4 py-3 text-sm font-semibold text-white hover:bg-green-700">Send request</button>
+                    </form>
+                    {contactSubmitted && (
+                      <p className="mt-3 rounded-xl bg-green-50 px-3 py-2 text-sm text-green-700">Expect an email in the next 24 hours.</p>
+                    )}
+                  </div>
+                )}
               </div>
-            )}
+            </aside>
           </div>
         </section>
       )}
