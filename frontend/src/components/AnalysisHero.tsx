@@ -16,21 +16,23 @@ export default function AnalysisHero({
     onAnalyze,
 }: AnalysisHeroProps) {
     return (
-        <header className="pt-10 pb-12 px-4 max-w-6xl mx-auto text-center">
+        <header className="relative pt-10 pb-14 px-4 max-w-6xl mx-auto text-center overflow-hidden">
+            <div className="absolute inset-x-0 top-0 -z-10 mx-auto h-40 w-72 rounded-full bg-gradient-to-r from-blue-100/80 via-sky-100/70 to-cyan-100/70 blur-3xl" />
             <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/90 px-4 py-2 text-sm font-semibold text-blue-700 shadow-[0_12px_30px_-18px_rgba(37,99,235,0.45)] backdrop-blur">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 Free Web Analyzer
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-sky-600 bg-clip-text text-transparent drop-shadow-sm">
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight mt-6 mb-4 bg-gradient-to-r from-slate-950 via-blue-900 to-sky-600 bg-clip-text text-transparent drop-shadow-sm">
                 Is your website costing you customers?
             </h1>
             <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed text-balance">
-                Get a fast, clear report on speed, trust, and layout issues — then fix what matters most.
+                Find conversion leaks, trust issues, and layout friction in one elegant dashboard-style report.
             </p>
 
             <div className="mb-6 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600">
-                <span className="rounded-full bg-white/90 px-3 py-1 shadow-sm border border-slate-200">⚡ 60-second analysis</span>
-                <span className="rounded-full bg-white/90 px-3 py-1 shadow-sm border border-slate-200">📱 Mobile friendly</span>
+                <span className="rounded-full bg-white/95 px-3 py-1 shadow-sm border border-slate-200 text-slate-700">⚡ 60-second analysis</span>
+                <span className="rounded-full bg-white/95 px-3 py-1 shadow-sm border border-slate-200 text-slate-700">📱 Mobile-first insights</span>
+                <span className="rounded-full bg-white/95 px-3 py-1 shadow-sm border border-slate-200 text-slate-700">🧩 Clear AI fixes</span>
             </div>
 
             <form
