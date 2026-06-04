@@ -14,6 +14,45 @@ def get_client():
     return OpenAI(api_key=api_key, base_url="https://api.groq.com/openai/v1")
 
 
+def ai_generate_detailed_report(url: str, analysis: dict):
+    prompt = f"""
+You are a senior website conversion consultant.
+Create a premium, business-friendly report for a small business owner.
+
+URL: {url}
+Current score: {analysis['score']}/100
+Detected issues:
+{analysis['issues']}
+
+Return valid JSON only with this shape:
+{{
+  "title": "short title",
+  "summary": "2 sentences explaining the website's main problems in plain language",
+  "findings": [
+    {{
+      "issue": "short issue title",
+      "why_it_matters": "why this hurts visitors or sales",
+      "fix_steps": ["step 1", "step 2", "step 3"],
+      "code_example": "small HTML/CSS/JS snippet that shows a real fix"
+    }}
+  ]
+}}
+"""
+
+    client = get_client()
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        response_format={"type": "json_object"},
+        messages=[
+            {"role": "system", "content": "You create premium, easy-to-read reports with practical fixes and code examples."},
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.3,
+    )
+
+    return response.choices[0].message.content
+
+
 def ai_enhance(url: str, analysis: dict):
     prompt = f"""
 You are a business website consultant.

@@ -26,6 +26,7 @@ interface AnalysisResponse {
 export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [premiumLoading, setPremiumLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [report, setReport] = useState<AnalysisResponse | null>(null);
 
@@ -74,6 +75,38 @@ export default function Home() {
   };
 
   // Helper type guard to make rendering the typed AI block clean
+  const handleDownloadDetailedReport = async () => {
+    if (!url) return;
+
+    setPremiumLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("https://web-analyzer-backend-622w.onrender.com/generate-detailed-report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Something went wrong while generating the detailed report.");
+      }
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = "premium-website-report.pdf";
+      link.click();
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred.");
+    } finally {
+      setPremiumLoading(false);
+    }
+  };
+
   const getAiReportData = (aiReport: string | AiReport | undefined): AiReport | null => {
     if (aiReport && typeof aiReport === "object") {
       return aiReport as AiReport;
@@ -149,6 +182,18 @@ export default function Home() {
                   {report.score}/100
                 </p>
               </div>
+            </div>
+
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-sm text-slate-600">Want a deeper PDF with real fixes, code examples, and business-friendly explanations?</p>
+              <button
+                type="button"
+                onClick={handleDownloadDetailedReport}
+                disabled={premiumLoading || !report}
+                className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-5 py-3 rounded-xl shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {premiumLoading ? "Generating PDF..." : "Get a more detailed report with real fixes — $12.99"}
+              </button>
             </div>
 
             {/* AI Summary Block */}
