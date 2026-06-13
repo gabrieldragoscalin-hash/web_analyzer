@@ -24,6 +24,8 @@ Current score: {analysis['score']}/100
 Detected issues:
 {analysis['issues']}
 
+Use plain language only. Avoid technical jargon. If you mention a term like "CSS", "HTML", "selector", or "query", explain it briefly in simple words.
+
 Return valid JSON only with this shape:
 {{
   "title": "short title",
@@ -33,7 +35,7 @@ Return valid JSON only with this shape:
       "issue": "short issue title",
       "why_it_matters": "why this hurts visitors or sales",
       "fix_steps": ["step 1", "step 2", "step 3"],
-      "code_example": "small HTML/CSS/JS snippet that shows a real fix"
+      "code_example": "optional small example showing a real fix, labeled in plain language"
     }}
   ]
 }}

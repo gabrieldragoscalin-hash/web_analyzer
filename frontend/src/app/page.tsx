@@ -87,6 +87,8 @@ export default function Home() {
     setContactSubmitted(true);
   };
 
+  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
   const handleDownloadDetailedReport = async () => {
     if (!url) return;
 
@@ -105,13 +107,54 @@ export default function Home() {
         throw new Error(errorData.detail || "Something went wrong while generating the detailed report.");
       }
 
-      const blob = await response.blob();
-      const downloadUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = downloadUrl;
-      link.download = "premium-website-report.pdf";
-      link.click();
-      window.URL.revokeObjectURL(downloadUrl);
+      const data = await response.json();
+      const jobId = data.job_id;
+      let status = data.status;
+
+      const downloadPdf = async () => {
+        const downloadResponse = await fetch(`${API_BASE_URL}/download-report/${jobId}`);
+        if (!downloadResponse.ok) {
+          const errorData = await downloadResponse.json();
+          throw new Error(errorData.detail || "Failed to download the report.");
+        }
+
+        const blob = await downloadResponse.blob();
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "premium-website-report.pdf";
+        link.click();
+        window.URL.revokeObjectURL(downloadUrl);
+      };
+
+      if (status === "ready") {
+        await downloadPdf();
+      } else {
+        const maxAttempts = 20;
+        for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+          await sleep(1200);
+          const statusResponse = await fetch(`${API_BASE_URL}/report-status/${jobId}`);
+          if (!statusResponse.ok) {
+            const errorData = await statusResponse.json();
+            throw new Error(errorData.detail || "Failed to check report status.");
+          }
+
+          const statusData = await statusResponse.json();
+          status = statusData.status;
+
+          if (status === "ready") {
+            await downloadPdf();
+            break;
+          }
+          if (status === "failed") {
+            throw new Error(statusData.error || "Detailed report generation failed.");
+          }
+        }
+
+        if (status !== "ready") {
+          throw new Error("The report is still being generated. Please try again in a moment.");
+        }
+      }
     } catch (error: unknown) {
       setError(getErrorMessage(error));
     } finally {
