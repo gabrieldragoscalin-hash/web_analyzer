@@ -9,7 +9,7 @@ from .ai import ai_enhance, ai_generate_detailed_report
 from .analyzer import detect_issues
 from .pdf_report import build_detailed_pdf
 from .schemas import WebsiteRequest
-from .scraper import fetch_site
+from .scraper import crawl_site, fetch_site
 
 router = APIRouter()
 
@@ -23,8 +23,8 @@ def analyze(request: WebsiteRequest):
         )
 
     try:
-        site_data = fetch_site(request.url)
-        analysis = detect_issues(site_data)
+        site_pages = crawl_site(request.url)
+        analysis = detect_issues(site_pages)
         ai_report = ai_enhance(request.url, analysis)
 
         return {
@@ -56,8 +56,8 @@ def generate_detailed_report(request: WebsiteRequest):
         )
 
     try:
-        site_data = fetch_site(request.url)
-        analysis = detect_issues(site_data)
+        site_pages = crawl_site(request.url)
+        analysis = detect_issues(site_pages)
         detailed_report_json = ai_generate_detailed_report(request.url, analysis)
         detailed_report = json.loads(detailed_report_json)
         pdf_bytes = build_detailed_pdf(request.url, analysis, detailed_report)
