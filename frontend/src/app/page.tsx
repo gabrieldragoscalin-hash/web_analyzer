@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, useEffect } from "react";
+import Link from "next/link";
+import { createBrowserClient } from "@supabase/ssr";
 
 import AnalysisHero from "../components/AnalysisHero";
 import AnalysisResults from "../components/AnalysisResults";
@@ -46,6 +48,38 @@ export default function Home() {
   const [error, setError] = useState<string>("");
   const [report, setReport] = useState<AnalysisResponse | null>(null);
 
+  // Track authenticated user state
+  const [user, setUser] = useState<any>(null);
+
+  // Initialize client-side Supabase listener to check authentication state
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
+  useEffect(() => {
+    const getUserSession = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+
+    getUserSession();
+
+    // Re-verify if auth state changes (sign-in/sign-out updates)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [supabase]);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+  };
+
   const handleAnalyze = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!url) return;
@@ -81,7 +115,6 @@ export default function Home() {
     }
   };
 
-  // Helper type guard to make rendering the typed AI block clean
   const handleContactSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setContactSubmitted(true);
@@ -175,9 +208,25 @@ export default function Home() {
               <p className="text-xs text-slate-500">Website health for your bussiness</p>
             </div>
           </div>
+
           <div className="flex items-center gap-2">
-            <button className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Login</button>
-            <button className="rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-200 hover:from-blue-700 hover:to-sky-600">Register</button>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="rounded-xl border border-red-200 bg-white px-3 py-2 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-50 transition-colors"
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <Link href="/login">
+                  <button className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Login</button>
+                </Link>
+                <Link href="/register">
+                  <button className="rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-200 hover:from-blue-700 hover:to-sky-600">Register</button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -210,7 +259,6 @@ export default function Home() {
       ) : null}
 
       <InfoSections />
-
     </div>
   );
 }

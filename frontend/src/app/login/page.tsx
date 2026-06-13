@@ -4,15 +4,18 @@ import Link from 'next/link'
 export default async function LoginPage({
     searchParams,
 }: {
-    searchParams: Promise<{ error?: string }>
+    searchParams: Promise<{ error?: string; message?: string }> // ⚡ Added message here
 }) {
-    const { error } = await searchParams
+    const { error, message } = await searchParams // ⚡ Destructured message here
 
     return (
         <div style={{ maxWidth: '400px', margin: '100px auto', padding: '20px', fontFamily: 'sans-serif' }}>
             <h2>Sign In</h2>
             <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+
+                {/* ⚡ Error and Success banners render right here */}
                 {error && <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
+                {message && <p style={{ color: 'green', fontSize: '14px', backgroundColor: '#e6f4ea', padding: '8px', borderRadius: '4px' }}>{message}</p>}
 
                 <div>
                     <label htmlFor="email">Email</label>
