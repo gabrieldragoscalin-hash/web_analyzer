@@ -55,11 +55,6 @@ export default function InfoSections() {
             </section>
 
             <section className="bg-slate-100 py-20 px-4 border-t border-slate-200">
-                <div className="mx-auto mb-10 flex max-w-4xl flex-col items-center text-center">
-                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-700">Preview</p>
-                    <h2 className="mt-2 text-2xl font-bold text-slate-900 md:text-3xl">A premium report layout your visitors will trust</h2>
-                    <p className="mt-3 max-w-2xl text-sm text-slate-600 md:text-base">The bottom preview now feels like a real product demo card — polished, readable, and built to convert interest into action.</p>
-                </div>
                 <div className="max-w-2xl mx-auto">
                     <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">Example output preview</h2>
                     <p className="text-slate-500 text-center mb-8 text-sm">Here is a glimpse of the structural breakdowns you will receive:</p>

@@ -128,13 +128,13 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 text-white shadow-lg shadow-blue-200">⚡</div>
             <div>
-              <p className="text-sm font-semibold tracking-[0.22em] text-blue-700 uppercase">Web Analyzer</p>
-              <p className="text-xs text-slate-500">AI website health for modern brands</p>
+              <p className="text-sm font-semibold tracking-[0.22em] text-blue-700 uppercase">Website Analyzer</p>
+              <p className="text-xs text-slate-500">Website health for your bussiness</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Login</button>
-            <button className="rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-200 hover:from-blue-700 hover:to-sky-600">Start free</button>
+            <button className="rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-200 hover:from-blue-700 hover:to-sky-600">Register</button>
           </div>
         </div>
       </nav>
