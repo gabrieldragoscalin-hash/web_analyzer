@@ -4,9 +4,8 @@ import uuid
 from typing import Any, Dict, Optional
 
 import requests
-from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException
+from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
 
 from .ai import ai_enhance, ai_generate_detailed_report
 from .analyzer import detect_issues
@@ -196,10 +195,17 @@ def download_report(job_id: str):
     if job["status"] != "ready":
         raise HTTPException(status_code=409, detail="Report is not yet ready.")
 
-    return StreamingResponse(
-        iter([job["pdf_bytes"]]),
+    if not isinstance(job["pdf_bytes"], (bytes, bytearray)):
+        raise HTTPException(status_code=500, detail="Generated report is invalid.")
+
+    pdf_data = bytes(job["pdf_bytes"])
+    if not pdf_data.startswith(b"%PDF"):
+        raise HTTPException(status_code=500, detail="Generated report is not valid PDF data.")
+
+    return Response(
+        content=pdf_data,
         media_type="application/pdf",
-        headers={"Content-Disposition": "attachment; filename=web-analyzer-premium-report.pdf"},
+        headers={"Content-Disposition": "attachment; filename=\"web-analyzer-premium-report.pdf\"", "Content-Length": str(len(pdf_data))},
     )
 
 
