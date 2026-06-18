@@ -30,12 +30,13 @@ export default async function LoginPage({
                 <button formAction={login} style={{ padding: '10px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
                     Log In
                 </button>
-
+            </form>    
                 <div style={{ textAlign: 'center', color: '#888', margin: '10px 0' }}>or</div>
-                <button formAction={loginWithFacebook} style={{ padding: '10px', background: '#1877F2', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                    Continue with Facebook
-                </button>
-            </form>
+                    <form action={loginWithFacebook}>
+                        <button type="submit" style={{ padding: '10px', background: '#1877F2', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                            Continue with Facebook
+                        </button>
+                    </form>
 
             <p style={{ fontSize: '14px', marginTop: '15px' }}>
                 Don't have an account? <Link href="/register" style={{ color: '#0070f3' }}>Register here</Link>
