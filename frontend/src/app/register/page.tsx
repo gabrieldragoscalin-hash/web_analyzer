@@ -11,7 +11,7 @@ export default async function RegisterPage({
 
     return (
         <>
-            <Navbar user={null} onLogout={async () => { }} />
+            <Navbar user={null} />
             <div style={{ maxWidth: '400px', margin: '100px auto', padding: '20px', fontFamily: 'sans-serif' }}>
                 <h2>Create Account</h2>
                 <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

@@ -1,13 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createBrowserClient } from "@supabase/ssr";
 
 interface NavbarProps {
     user: any;
-    onLogout: () => Promise<void>;
+    onLogout?: () => Promise<void>;
 }
 
 export default function Navbar({ user, onLogout }: NavbarProps) {
+    const router = useRouter();
+
+    // Setup client-side supabase fallback only used if a custom onLogout isn't passed down
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
+    const handleLogoutClick = async () => {
+        if (onLogout) {
+            await onLogout();
+        } else {
+            // Safe fallback logic for static pages
+            await supabase.auth.signOut();
+            router.refresh();
+            router.push("/");
+        }
+    };
+
     return (
         <nav className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_-20px_rgba(15,23,42,0.35)]">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
@@ -24,7 +45,7 @@ export default function Navbar({ user, onLogout }: NavbarProps) {
                 <div className="flex items-center gap-2">
                     {user ? (
                         <button
-                            onClick={onLogout}
+                            onClick={handleLogoutClick} // ⚡ Uses the safe click handler instead of direct onLogout execution
                             className="rounded-xl border border-red-200 bg-white px-3 py-2 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-50 transition-colors"
                         >
                             Logout

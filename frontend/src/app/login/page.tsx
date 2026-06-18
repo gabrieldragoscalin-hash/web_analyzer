@@ -5,13 +5,13 @@ import Navbar from "../../components/navbar";
 export default async function LoginPage({
     searchParams,
 }: {
-    searchParams: Promise<{ error?: string; message?: string }> 
+    searchParams: Promise<{ error?: string; message?: string }>
 }) {
-    const { error, message } = await searchParams 
+    const { error, message } = await searchParams
 
     return (
         <>
-            <Navbar user={null} onLogout={async () => { }} />
+            <Navbar user={null} />
             <div style={{ maxWidth: '400px', margin: '100px auto', padding: '20px', fontFamily: 'sans-serif' }}>
                 <h2>Sign In</h2>
                 <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
