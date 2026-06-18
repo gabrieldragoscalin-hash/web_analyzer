@@ -1,4 +1,4 @@
-import { signup } from '../auth/actions'
+import { signup, loginWithFacebook } from '../auth/actions'
 import Link from 'next/link'
 
 export default async function RegisterPage({
@@ -31,6 +31,14 @@ export default async function RegisterPage({
 
                 <button formAction={signup} style={{ padding: '10px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '10px' }}>
                     Register
+                </button>
+            </form>
+
+            <div style={{ textAlign: 'center', color: '#888', margin: '10px 0' }}>or</div>
+
+            <form action={loginWithFacebook} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <button type="submit" style={{ padding: '10px', background: '#1877F2', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    Continue with Facebook
                 </button>
             </form>
             <p style={{ fontSize: '14px', marginTop: '15px' }}>

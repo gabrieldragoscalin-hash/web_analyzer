@@ -32,7 +32,7 @@ export default async function LoginPage({
                 </button>
             </form>    
                 <div style={{ textAlign: 'center', color: '#888', margin: '10px 0' }}>or</div>
-                    <form action={loginWithFacebook}>
+                    <form action={loginWithFacebook} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                         <button type="submit" style={{ padding: '10px', background: '#1877F2', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
                             Continue with Facebook
                         </button>
