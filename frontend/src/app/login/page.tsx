@@ -16,7 +16,7 @@ export default async function LoginPage({
             <div className="mx-auto max-w-md px-4 py-16 sm:py-24">
                 <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-[0_8px_30px_-20px_rgba(15,23,42,0.35)]">
                     <div className="mb-6">
-                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">Welcome Back</h2>
+                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">Login</h2>
                         <p className="mt-1 text-sm text-slate-500">Sign in to manage your website analytics</p>
                     </div>
 
@@ -73,7 +73,7 @@ export default async function LoginPage({
                     <form action={loginWithFacebook} style={{ display: 'flex', flexDirection: 'column' }}>
                         <button
                             type="submit"
-                            className="rounded-xl bg-[#1877F2] px-4 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-[#166FE5] transition-colors flex items-center justify-center gap-2"
+                            className="mt-2 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition-colors hover:from-blue-700 hover:to-sky-600"
                         >
                             Continue with Facebook
                         </button>

@@ -80,7 +80,7 @@ export default async function RegisterPage({
                     <form action={loginWithFacebook} style={{ display: 'flex', flexDirection: 'column' }}>
                         <button
                             type="submit"
-                            className="rounded-xl bg-[#1877F2] px-4 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-[#166FE5] transition-colors flex items-center justify-center gap-2"
+                            className="mt-2 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition-colors hover:from-blue-700 hover:to-sky-600"
                         >
                             Continue with Facebook
                         </button>

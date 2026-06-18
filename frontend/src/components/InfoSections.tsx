@@ -4,7 +4,6 @@ export default function InfoSections() {
             <section className="bg-slate-950 text-white py-20 px-4 relative overflow-hidden">
                 <div className="absolute inset-0 -z-10 opacity-40" style={{ backgroundImage: 'radial-gradient(circle at top, rgba(56,189,248,0.12), transparent 30%), radial-gradient(circle at right, rgba(129,140,248,0.12), transparent 25%)' }} />
                 <div className="max-w-4xl mx-auto text-center">
-                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sky-300">Why teams use it</p>
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">Turn website friction into revenue-ready clarity</h2>
                     <p className="text-slate-300 text-sm md:text-base mb-10 max-w-2xl mx-auto">A few visible improvements can instantly increase trust, clarity, and conversion on your homepage.</p>
                     <div className="grid md:grid-cols-3 gap-8">
@@ -28,11 +27,6 @@ export default function InfoSections() {
             </section>
 
             <section className="py-20 px-4 max-w-6xl mx-auto text-center">
-                <div className="mb-10 rounded-[28px] border border-slate-200 bg-gradient-to-r from-white via-slate-50 to-white p-6 shadow-[0_18px_35px_-25px_rgba(15,23,42,0.35)]">
-                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-700">Why this feels premium</p>
-                    <h2 className="mt-2 text-3xl font-bold text-slate-900">A sharper product story, not just a checklist.</h2>
-                    <p className="mx-auto mt-3 max-w-3xl text-sm text-slate-600 md:text-base">Clear diagnostics, confident recommendations, and polished presentation make the experience feel like a real SaaS product.</p>
-                </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-3">How it works</h2>
                 <p className="text-slate-500 text-sm md:text-base mb-10 max-w-2xl mx-auto">A simple 3-step flow that turns a rough homepage into a clearer sales page.</p>
                 <div className="grid md:grid-cols-3 gap-8">
