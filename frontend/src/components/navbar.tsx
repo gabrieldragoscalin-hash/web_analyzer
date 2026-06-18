@@ -36,8 +36,8 @@ export default function Navbar({ user, onLogout }: NavbarProps) {
                     <Link href="/" className="flex items-center gap-3 no-underline">
                         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 text-white shadow-lg shadow-blue-200">⚡</div>
                         <div>
-                            <p className="text-sm font-semibold tracking-[0.22em] text-blue-700 uppercase">Website Analyzer</p>
-                            <p className="text-xs text-slate-500">Website health for your business</p>
+                            <p className="text-sm font-semibold tracking-[0.22em] text-blue-700 uppercase">Web Analyzer</p>
+                            <p className="text-xs text-slate-500">Web health for your business</p>
                         </div>
                     </Link>
                 </div>
@@ -45,7 +45,7 @@ export default function Navbar({ user, onLogout }: NavbarProps) {
                 <div className="flex items-center gap-2">
                     {user ? (
                         <button
-                            onClick={handleLogoutClick} // ⚡ Uses the safe click handler instead of direct onLogout execution
+                            onClick={handleLogoutClick}
                             className="rounded-xl border border-red-200 bg-white px-3 py-2 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-50 transition-colors"
                         >
                             Logout
